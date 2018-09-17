@@ -1,0 +1,11 @@
+/vendor/
+/logs/*
+!/logs/README.md
+slim/cache/*
+!slim/cache/.gitkeep
+.DS_Store
+hot
+node_modules/
+mix-manifest.json
+package-lock.json
+composer.lock
