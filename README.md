@@ -9,9 +9,21 @@ You'll need
 
 
 To run the application in development, you can run these commands 
-	composer start
-	npm run hot
+	`composer start`
+	`npm run hot`
 
-## Decisions made
+## Comments after 10am
 
-I decided to use Slim framework to help give a structure to the platform.
+I decided to use Slim framework to help give a structure to the platform, 
+along with Blade to provide views, 
+and bootstrap for layout.
+
+Reflecting:
+ - Use different Validation
+ - Better user journey
+ - Update more comments (some became old in the last few hours)
+ - Better 'thank you for registering'
+ - Tests
+ - use env()
+ - Plug DB into Slim container
+ - 
