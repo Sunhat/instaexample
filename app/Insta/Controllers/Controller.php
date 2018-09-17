@@ -52,7 +52,7 @@ class Controller {
 	 * Build the data for the response
 	 * Hide errors if there are none
 	 */
-	protected final function buildResponse(array $data, $json = false)
+	private final function buildResponse(array $data, $json = false)
 	{
 		if(count($this->errors) > 0) {
 			http_response_code(418);
@@ -68,7 +68,7 @@ class Controller {
 	 * Just makes returning some common data more DRY.
 	 * Additionally deciding to return JSON or a page
 	 */
-	protected final function render(Request $request, Response $response, string $view, array $data = [])
+	private final function render(Request $request, Response $response, string $view, array $data = [])
 	{
 		return $this->view->render($response, $view, $data);
 	} 
