@@ -45,7 +45,7 @@ class Controller {
 		if (count($request->getHeader('X-Requested-With')) > 0 && $request->getHeader('X-Requested-With')[0] === 'XMLHttpRequest') {
 			return $this->json($request, $data);
 		}
-		return $this->render($request, $response, $view, $data);
+		return $this->view->render($response, $view, $data);
 	}
 
 	/**
@@ -64,15 +64,8 @@ class Controller {
 	}
 
 	/**
-	 * This method can be used for the child Controllers.
-	 * Just makes returning some common data more DRY.
-	 * Additionally deciding to return JSON or a page
+	 * Build a JSON response
 	 */
-	private final function render(Request $request, Response $response, string $view, array $data = [])
-	{
-		return $this->view->render($response, $view, $data);
-	} 
-
 	private final function json(Request $request, array $data = [])
 	{
 		$data = $this->buildResponse($data);
