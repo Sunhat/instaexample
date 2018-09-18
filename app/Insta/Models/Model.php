@@ -24,7 +24,8 @@ abstract class Model {
 	abstract static function createTable(): string;
 
 	/**
-	 * Override static calls 
+	 * Override static calls,
+	 * This enables us to catch PDOExceptions, and generate the table if necessary
 	 */
 	public static function __callStatic($name, $parameters)
 	{
@@ -41,9 +42,8 @@ abstract class Model {
 	}
 
 	/**
-	 * Create, Read, Update, Delete
+	 * Create a row in the database
 	 */
-	
 	private final static function create(array $columns)
 	{
 		$column_names = self::buildInsertValues($columns);
@@ -57,14 +57,19 @@ abstract class Model {
 				->prepare('INSERT INTO ' . static::table() . "({$column_names})VALUES({$column_keys})")
 				->execute($columns);
 	}
-
+	/**
+	 * Find first row, default by id
+	 */
 	private final static function find($find, string $findBy = 'id')
 	{
 		$sql = DB::get()->prepare("SELECT * FROM " . static::table() . " WHERE {$findBy}=? LIMIT 1");
 		$sql->execute([$find]);
 		return $sql->fetch();
 	}
-
+	
+	/**
+	 * Update row by id
+	 */
 	private final static function update(int $id, array $columns)
 	{
 		$set = self::buildUpdateSet($columns);
@@ -74,6 +79,9 @@ abstract class Model {
 		return $sql;
 	}
 
+	/**
+	 * Delete row by id
+	 */
 	private final static function destroy(int $id)
 	{
 		return DB::get()
@@ -93,7 +101,10 @@ abstract class Model {
 		}
 		return $set_list;
 	}
-
+	/**
+	 * Build insert values - allows for prefixing, for the otherside
+	 * e.g. (name,email,password,doh)
+	 */
 	private final static function buildInsertValues(array $columns, string $prefix = ''): string
 	{
 		return $prefix . implode(',' . $prefix, array_keys($columns));

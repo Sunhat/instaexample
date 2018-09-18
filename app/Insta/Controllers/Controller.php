@@ -37,7 +37,8 @@ class Controller {
 
 
 	/**
-	 * For the controllers, to make responses easier
+	 * This method can be used for the child Controllers.
+	 * to make responses easier
 	 */
 	protected final function response(Request $request, Response $response, string $view = '', array $data = [])
 	{
