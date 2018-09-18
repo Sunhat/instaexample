@@ -69,7 +69,7 @@ class Controller {
 	private final function json(Request $request, array $data = [])
 	{
 		$data = $this->buildResponse($data);
-		if(count($this->errors) == 0) {
+		if(count($this->errors) === 0) {
 			unset($data['errors']);
 		}
 		header("Content-Type: application/json");
