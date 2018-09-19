@@ -45,7 +45,7 @@ class Controller {
 			http_response_code(418);
 			$data['errors'] = $this->errors;
 		} else {
-			$data['success'] = $this->succcess;
+			$data['success'] = $this->success;
 		}
 		$data['routeName'] = $this->container->get('currentRoute');
 		return $data;
