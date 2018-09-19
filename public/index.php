@@ -27,6 +27,8 @@ $app->getContainer()['view'] = function ($container) {
     );
 };
 
+// Helpers
+require __DIR__ . '/../slim/helpers.php';
 
 // Set up dependencies
 require __DIR__ . '/../slim/dependencies.php';

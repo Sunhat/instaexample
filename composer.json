@@ -23,7 +23,6 @@
         "phpunit/phpunit": ">=4.8 < 6.0"
     },
     "autoload": {
-        "files": ["app/helpers.php"],
 		"psr-4": {
 			"Insta\\": "app/Insta"
 		}
