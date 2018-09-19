@@ -9,9 +9,8 @@ use Respect\Validation\Exceptions\NestedValidationException;
 use Slim\Http\Request;
 use Slim\Http\Response; 
 
-class UserController extends Controller {
-	
-
+class UserController extends Controller
+{
 	public function create(Request $request, Response $response, array $segments)
 	{
 		return $this->response($request, $response, 'create');
@@ -34,12 +33,8 @@ class UserController extends Controller {
 		} catch (\Exception $e) {
 			$this->logger->info($e->getMessage());
 			if($e instanceof NestedValidationException) {
-				// Set custom error messages 
-				// really silly to do it here like this. I wish I didn't use this validation package!
-				$e->findMessages([
-					'noneOf' => 'Password must be secure',
-					'callback' => 'Email already in use',
-				]);
+				// Set custom error messages - really silly to do it here like this. I wish I didn't use this validation package!
+				$e->findMessages(['noneOf' => 'Password must be secure', 'callback' => 'Email already in use']);
 				// Now set/get the actually errors
 				$this->errors = $e->getMessages();
 			} else {
