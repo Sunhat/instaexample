@@ -1,5 +1,24 @@
 <?php
 
+
+/**
+ * This method gets used in Blade templates.
+ * It checks if the current route name is matches one of strings provided
+ * e.g. isRoute('')
+ */
+
+$container = $app->getContainer();
+
+function isRoute() {
+	global $container;
+	$args = func_get_args();
+	foreach($args as $arg) {
+		if($arg === $container['currentRoute'])
+			return 'active';
+	}
+	return null;
+}
+
 /**
  * I found this function on:
  * https://www.sitepoint.com/use-laravel-mix-non-laravel-projects/

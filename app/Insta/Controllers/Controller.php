@@ -22,21 +22,6 @@ class Controller {
 	}
 
 	/**
-	 * This method gets used in Blade templates.
-	 * It checks if the current route name is matches one of strings provided
-	 * e.g. $controller->isRoute('')
-	 */
-	public function isRoute() {
-		$args = func_get_args();
-		foreach($args as $arg) {
-			if($arg === $this->container->get('currentRoute'))
-				return 'active';
-		}
-		return null;
-	}
-
-
-	/**
 	 * This method can be used for the child Controllers.
 	 * to make responses easier
 	 */
@@ -60,7 +45,6 @@ class Controller {
 		}
 		$data['errors'] = $this->errors;
 		$data['routeName'] = $this->container->get('currentRoute');
-		$data['controller'] = $this;
 		return $data;
 	}
 
