@@ -39,12 +39,14 @@
 
 
 	<main class="container">
-		@foreach($errors as $key => $error)
-			<div class="alert alert-danger">
-			{{ $error }}
-			</div>
-		@endforeach
 		<div id="flash-container">
+			@if(isset($errors))
+				@foreach($errors as $key => $error)
+					<div class="alert alert-danger">
+						{{ $error }}
+					</div>
+				@endforeach
+			@endif
 		</div>
 		@yield('content')
 	</main>

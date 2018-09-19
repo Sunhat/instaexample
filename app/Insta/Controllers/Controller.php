@@ -42,8 +42,8 @@ class Controller {
 	{
 		if(count($this->errors) > 0) {
 			http_response_code(418);
+			$data['errors'] = $this->errors;
 		}
-		$data['errors'] = $this->errors;
 		$data['routeName'] = $this->container->get('currentRoute');
 		return $data;
 	}
