@@ -16,21 +16,21 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item {{ $controller->isRoute('user.create', 'user.store') }}">
+				<li class="nav-item {{ isRoute('user.create', 'user.store') }}">
 					<a class="nav-link" href="/">nav 1 <span class="sr-only">(current)</span></a>
 				</li>
-				<li class="nav-item {{ $controller->isRoute('example1') }}">
+				<li class="nav-item {{ isRoute('example1') }}">
 					<a class="nav-link" href="/e1">nav 2</a>
 				</li>
-				<li class="nav-item {{ $controller->isRoute('example2') }}">
+				<li class="nav-item {{ isRoute('example2') }}">
 					<a class="nav-link" href="/e2">nav 3</a>
 				</li>
-				<li class="nav-item {{ $controller->isRoute('example3') }}">
+				<li class="nav-item {{ isRoute('example3') }}">
 					<a class="nav-link" href="/e3">nav 4</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav">
-				<li class="nav-item {{ $controller->isRoute('example4') }}">
+				<li class="nav-item {{ isRoute('example4') }}">
 					<a class="nav-link" href="/e4">nav 5</a>
 				</li>
 			</ul>
