@@ -30,6 +30,7 @@ class UserController extends Controller
 			unset($input['password_confirmation']);
 			// Create the user
 			User::create($input);
+			$this->success = "Thanks for registering!";
 		} catch (\Exception $e) {
 			$this->logger->info($e->getMessage());
 			if($e instanceof NestedValidationException) {
