@@ -44,6 +44,8 @@
 			{{ $error }}
 			</div>
 		@endforeach
+		<div id="flash-container">
+		</div>
 		@yield('content')
 	</main>
 </body>
