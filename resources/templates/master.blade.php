@@ -40,6 +40,11 @@
 
 	<main class="container">
 		<div id="flash-container">
+			@if(isset($success))
+				<div class="alert alert-success">
+					{{ $success }}
+				</div>
+			@endif
 			@if(isset($errors))
 				@foreach($errors as $key => $error)
 					<div class="alert alert-danger">

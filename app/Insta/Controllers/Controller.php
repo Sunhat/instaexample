@@ -13,6 +13,7 @@ class Controller {
 	protected $logger;
 	protected $route;
 	protected $errors = [];
+	protected $success = null;
 
 	public function __construct($container)
 	{
@@ -43,6 +44,8 @@ class Controller {
 		if(count($this->errors) > 0) {
 			http_response_code(418);
 			$data['errors'] = $this->errors;
+		} else {
+			$data['success'] = $this->succcess;
 		}
 		$data['routeName'] = $this->container->get('currentRoute');
 		return $data;
