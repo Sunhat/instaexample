@@ -25,21 +25,15 @@ class UserController extends Controller
 			$validator = new RegisterUserValidator($request);
 			$validator->validate();
 			$input = $validator->input();
-
 			// Unset password confirmation, otherwise Model will try and insert that as a column
 			unset($input['password_confirmation']);
-			// Create the user
 			User::create($input);
 			$this->success = "Thanks for registering!";
 		} catch (\Exception $e) {
-			$this->logger->info($e->getMessage());
-			if($e instanceof NestedValidationException) {
-				// Set custom error messages - really silly to do it here like this. I wish I didn't use this validation package!
-				$e->findMessages(['noneOf' => 'Password must be secure', 'callback' => 'Email already in use']);
-				// Now set/get the actually errors
+			if ($e instanceof NestedValidationException) {
 				$this->errors = $e->getMessages();
 			} else {
-				array_push($this->errors, 'Failed to create your account. Please contact an admin');
+				$this->errors[] =  'Failed to create your account. Please contact an admin';
 			}
 		}
 		return $this->response($request, $response, 'create');

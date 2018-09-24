@@ -18,7 +18,7 @@ abstract class Validator
 {
 
 	protected $validator;
-	protected $input;
+	protected $input = [];
 
 	public function __construct(Request $request)
 	{
@@ -39,10 +39,15 @@ abstract class Validator
 		return call_user_func([$this->validator, $name], $arguments);
 	}
 
-
 	final public function validate(): bool
 	{
-		return $this->validator->assert((object) $this->input);
+		try {
+			return $this->validator->assert((object) $this->input);
+		} catch (NestedValidationError $e) {
+			// Set custom error messages - really silly to do it here like this. I wish I didn't use this validation package!
+			$e->findMessages($this->errorMessages());
+			throw $e;
+		}
 	}
 
 	final public function input(): array
@@ -50,5 +55,6 @@ abstract class Validator
 		return $this->input;
 	}
 
+	abstract public function errorMessages(): array;
 	abstract public function rules(Request $request): array;
 }

@@ -6,6 +6,7 @@ use Insta\Models\User;
 use Slim\Http\Request;
 // Third-party
 use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\NestedValidationException;
 
 class RegisterUserValidator extends Validator
 {
@@ -31,7 +32,15 @@ class RegisterUserValidator extends Validator
 		'qwerty',
 		'instasupply',
 		'passw0rd',
-	]; 
+	];
+
+	public function errorMessages(): array
+	{
+		return [
+			'noneOf' => 'Password must be secure', 
+			'callback' => 'Email already in use'
+		];
+	}
 
 	public function rules($request): array
 	{
