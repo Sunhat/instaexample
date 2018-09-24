@@ -13,7 +13,8 @@ use PDO;
 /**
  * if I had more time I would've added env() too
  */
-class Database {
+class Database
+{
 
 	private static $PDO;
 

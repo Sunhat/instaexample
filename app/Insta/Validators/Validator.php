@@ -14,14 +14,14 @@ use Respect\Validation\Validator as v;
  * Extend this class to build a Validator. See RegisterUserValidator.
  * ReigsterUserValidator::validate($request)
  */
-abstract class Validator {
+abstract class Validator
+{
 
 	protected $validator;
 	protected $input;
 
 	public function __construct(Request $request)
 	{
-		$this->input = [];
 		$this->validator = new v;
 		foreach($this->rules($request) as $key => $rules) {
 			// Extract the Request POST/GET data based on rules() keys 
@@ -40,12 +40,12 @@ abstract class Validator {
 	}
 
 
-	public function validate(): bool
+	final public function validate(): bool
 	{
 		return $this->validator->assert((object) $this->input);
 	}
 
-	public final function input(): array
+	final public function input(): array
 	{
 		return $this->input;
 	}

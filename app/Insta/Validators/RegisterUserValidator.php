@@ -7,7 +7,8 @@ use Slim\Http\Request;
 // Third-party
 use Respect\Validation\Validator as v;
 
-class RegisterUserValidator extends Validator {
+class RegisterUserValidator extends Validator
+{
 
 	private $password_blacklist = [
 		'pass',
