@@ -1,7 +1,8 @@
 <?php
 namespace Insta\Models;
 
-class User extends Model {
+class User extends Model
+{
 	public static function table(): string
 	{
 		return 'users';

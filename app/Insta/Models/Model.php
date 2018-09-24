@@ -9,8 +9,11 @@ use PDOException;
 /**
  * Inspired by Eloquent, a quick set-up for CRUD updates
  */
-abstract class Model {
-
+abstract class Model
+ {
+	 /**
+	  * Methods that will be allowed to be externally called via __callStatic()
+	  */
 	private static $allowed_methods = ['find', 'create', 'update', 'destroy'];
 
 	/**
@@ -44,7 +47,7 @@ abstract class Model {
 	/**
 	 * Create a row in the database
 	 */
-	private final static function create(array $columns)
+	final private static function create(array $columns)
 	{
 		$column_names = self::buildInsertValues($columns);
 		$column_keys = self::buildInsertValues($columns , ':');
@@ -60,7 +63,7 @@ abstract class Model {
 	/**
 	 * Find first row, default by id
 	 */
-	private final static function find($find, string $findBy = 'id')
+	final private static function find($find, string $findBy = 'id')
 	{
 		$sql = DB::get()->prepare("SELECT * FROM " . static::table() . " WHERE {$findBy}=? LIMIT 1");
 		$sql->execute([$find]);
@@ -70,7 +73,7 @@ abstract class Model {
 	/**
 	 * Update row by id
 	 */
-	private final static function update(int $id, array $columns)
+	final private static function update(int $id, array $columns)
 	{
 		$set = self::buildUpdateSet($columns);
 		$columns['id'] = $id;
@@ -82,7 +85,7 @@ abstract class Model {
 	/**
 	 * Delete row by id
 	 */
-	private final static function destroy(int $id)
+	final private static function destroy(int $id)
 	{
 		return DB::get()
 				->prepare("DELETE FROM " . static::table() . " WHERE id=?")
@@ -93,7 +96,7 @@ abstract class Model {
 	 * Builds the update SET, e.g.
 	 * first_name = :first_name, email = :email
 	 */
-	private final static function buildUpdateSet(array $columns): string
+	final private static function buildUpdateSet(array $columns): string
 	{
 		$set_list = '';
 		foreach($columns as $key => $col) {
@@ -105,7 +108,7 @@ abstract class Model {
 	 * Build insert values - allows for prefixing, for the otherside
 	 * e.g. (name,email,password,doh)
 	 */
-	private final static function buildInsertValues(array $columns, string $prefix = ''): string
+	final private static function buildInsertValues(array $columns, string $prefix = ''): string
 	{
 		return $prefix . implode(',' . $prefix, array_keys($columns));
 	}
