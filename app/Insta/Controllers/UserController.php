@@ -22,8 +22,7 @@ class UserController extends Controller
 	public function store(Request $request, Response $response, array $segments)
 	{
 		try {
-			$validator = new RegisterUserValidator($request);
-			$validator->validate();
+			$validator = (new RegisterUserValidator($request))->validate();
 			$input = $validator->input();
 			// Unset password confirmation, otherwise Model will try and insert that as a column
 			unset($input['password_confirmation']);

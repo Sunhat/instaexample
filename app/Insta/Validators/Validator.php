@@ -39,10 +39,14 @@ abstract class Validator
 		return call_user_func([$this->validator, $name], $arguments);
 	}
 
+	/**
+	 * Validate input against the rules
+	 */
 	final public function validate(): bool
 	{
 		try {
-			return $this->validator->assert((object) $this->input);
+			$this->validator->assert((object) $this->input);
+			return $this;
 		} catch (NestedValidationError $e) {
 			// Set custom error messages - really silly to do it here like this. I wish I didn't use this validation package!
 			$e->findMessages($this->errorMessages());
